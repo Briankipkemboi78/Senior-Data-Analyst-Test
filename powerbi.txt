@@ -1,0 +1,61 @@
+'''you need a measure that shows the repayment collection rate: 
+total amount collected divided by total amount scheduled, within the current filter context.'''
+
+
+Collection Rate =
+DIVIDE(
+  SUM(Repayments[amount_paid]),
+  SUM(Schedules[expected_amount])
+)
+
+---------------------------------------------------------------
+'''loan disbursements compared to the same month last year (SPLY) in a single visual. Write the correct DAX measure.'''
+
+
+SPLY Disbursements =
+CALCULATE(
+  SUM(Loans[amount]),
+  SAMEPERIODLASTYEAR(DateTable[Date])
+)
+
+
+----------------------------------------------------------------------------
+'''You need a card visual that always shows the national PAR30 regardless of which branch is selected. What DAX pattern achieves this?'''
+
+National PAR30 =
+CALCULATE(
+  DIVIDE(
+    SUMX(ALL(Loans), Loans[is_par30] * Loans[outstanding_balance]),
+    SUMX(ALL(Loans), Loans[outstanding_balance])
+  )
+)
+
+
+------------------------------------------------------------------------------------------------
+'''You need a measure showing loans active AS OF the selected date, 
+not just loans disbursed on that date. Which DAX is correct?'''
+
+Active Loans As Of Date =
+CALCULATE(
+  COUNTROWS(Loans),
+  Loans[disbursement_date] <= MAX(DateTable[Date]),
+  Loans[maturity_date] >= MAX(DateTable[Date])
+)
+
+--------------------------------------------------------------------------------------------------
+The Company pilots a new credit scoring model in one region. Default rate drops from 18% to 14%. 
+p-value = 0.03, alpha = 0.05, n = 800 clients. What is the correct conclusion?
+
+A. Reject the null hypothesis — the 4% reduction is statistically significant at alpha=0.05. Before full rollout, 
+assess practical significance (cost savings vs implementation cost) and whether the pilot region is representative.
+
+-----------------------------------------------------------------------------------------------
+
+The company's default prediction model has precision = 0.72 and recall = 0.41. 
+A colleague suggests raising the classification threshold to improve precision. What is the trade-off?
+
+A. Raising the threshold increases precision (fewer false positives) but further decreases recall (more actual defaults are missed). 
+Evaluate using F1-score or a business cost matrix weighting missed defaults vs false alerts.
+
+
+------------------------------------------------------------------------------------------------

@@ -59,3 +59,42 @@ Evaluate using F1-score or a business cost matrix weighting missed defaults vs f
 
 
 ------------------------------------------------------------------------------------------------
+You want to test whether repayment rates differ significantly across Company's 5 regional branches. 
+Which statistical approach is correct?
+
+A. One-way ANOVA to test whether any branch mean differs. If significant (p < alpha), 
+apply Tukey HSD post-hoc test to identify which specific branch pairs differ, controlling family-wise error rate.
+
+
+------------------------------------------------------------------------------------------------
+In a company logistic regression model predicting default, the coefficient for 'loan_term_months' is -0.12. 
+What is the correct interpretation?
+
+A. Each additional month of loan term is associated with an approximately 11.3% decrease in the odds of default (odds ratio = e^-0.12 ≈ 0.887), 
+holding other variables constant.
+
+Explanation: A negative coefficient means the odds ratio e^-0.12 ≈ 0.887 — each additional month multiplies the odds by 0.887, 
+reducing them by ~11.3%. This is NOT the same as a 12% decrease in probability. 
+Also, this is an association, not causation — longer-term products may simply attract lower-risk clients.
+
+--------------------------------------------------------------------------------------------------
+Company's operations team reports the daily disbursement Power BI dashboard shows zero disbursements for yesterday, 
+but the database clearly has records. What are your investigation steps?
+
+1. Check if yesterday's date exists in the DateTable (import may not have refreshed)
+2. Verify the relationship between DateTable and Loans is active and correct
+3. Check DirectQuery connection — confirm warehouse data is accessible
+4. Test the DAX measure in isolation with CALCULATE(..., ALL(DateTable))
+5. Check row-level security — ops team may lack access to recent data
+
+--------------------------------------------------------------------------------------------------
+Company's CFO asks: 'Our average loan size has grown 22% this year, but total disbursements are flat. 
+How is that possible?' How do you explain and investigate this analytically?
+
+A. If average loan size increases but total disbursements stay flat, the number of loans disbursed must have decreased 
+proportionally. Investigate: (1) loan count by month and branch, (2) whether new client acquisition has slowed, 
+(3) product mix shift toward larger loans for fewer clients, (4) operational capacity constraints.
+
+Explanation: Total = Average x Count. If average rises 22% and total is flat, loan count must have fallen by ~18%. 
+The analytical story: Watu may be serving fewer but wealthier clients, or facing acquisition slowdown, 
+or making a strategic shift. Breaking down by branch and product type confirms which.

@@ -68,7 +68,7 @@ st.markdown("""
 QUESTIONS = [
     {
         "cat": "SQL", "diff": "medium",
-        "q": "Watu Credit's loans table stores every loan issued to a client. Write a query to find all clients who currently have more than one active loan, showing their client_id and total outstanding balance.",
+        "q": "The Company's loans table stores every loan issued to a client. Write a query to find all clients who currently have more than one active loan, showing their client_id and total outstanding balance.",
         "code": """-- loans(loan_id, client_id, disbursement_date,
 --   outstanding_balance, status)
 -- status values: 'active', 'closed', 'defaulted'""",
@@ -83,7 +83,7 @@ QUESTIONS = [
     },
     {
         "cat": "SQL", "diff": "hard",
-        "q": "Watu Credit wants to identify clients who missed a repayment in the previous calendar month. Write a query using the repayments and schedules tables.",
+        "q": "The Company wants to identify clients who missed a repayment in the previous calendar month. Write a query using the repayments and schedules tables.",
         "code": """-- schedules(schedule_id, loan_id, client_id, due_date, expected_amount)
 -- repayments(repayment_id, loan_id, client_id, payment_date, amount_paid)""",
         "opts": [
@@ -97,7 +97,7 @@ QUESTIONS = [
     },
     {
         "cat": "SQL", "diff": "hard",
-        "q": "Calculate the Portfolio at Risk (PAR30) for Watu Credit: the percentage of the outstanding portfolio where any scheduled payment is more than 30 days overdue.",
+        "q": "Calculate the Portfolio at Risk (PAR30) for The Company: the percentage of the outstanding portfolio where any scheduled payment is more than 30 days overdue.",
         "code": """-- loans(loan_id, client_id, outstanding_balance, status)
 -- schedules(schedule_id, loan_id, due_date, expected_amount)
 -- PAR30 = outstanding balance of at-risk loans / total outstanding""",
@@ -112,7 +112,7 @@ QUESTIONS = [
     },
     {
         "cat": "SQL", "diff": "medium",
-        "q": "Watu Credit wants a month-by-month count of new client acquisitions and cumulative total clients. Which query is correct?",
+        "q": "The Company wants a month-by-month count of new client acquisitions and cumulative total clients. Which query is correct?",
         "code": "-- clients(client_id, registration_date, branch_id)",
         "opts": [
             "SELECT\n  DATE_TRUNC('month', registration_date) AS month,\n  COUNT(*) AS new_clients,\n  SUM(COUNT(*)) OVER\n    (ORDER BY DATE_TRUNC('month', registration_date)) AS cumulative_clients\nFROM clients\nGROUP BY 1\nORDER BY 1",
@@ -125,7 +125,7 @@ QUESTIONS = [
     },
     {
         "cat": "SQL", "diff": "hard",
-        "q": "For each Watu Credit branch, find the loan officer with the highest repayment collection rate. Return branch_id, officer_id, and their collection rate.",
+        "q": "For each branch of The Company, find the loan officer with the highest repayment collection rate. Return branch_id, officer_id, and their collection rate.",
         "code": """-- loans(loan_id, officer_id, branch_id, expected_total)
 -- repayments(repayment_id, loan_id, amount_paid)""",
         "opts": [
@@ -139,7 +139,7 @@ QUESTIONS = [
     },
     {
         "cat": "Python", "diff": "medium",
-        "q": "You receive Watu Credit's daily repayment file as an Excel sheet. The 'payment_date' column has mixed formats: some rows are '2024-03-15', others are '15/03/2024'. How do you handle this safely in pandas?",
+        "q": "You receive The Company's daily repayment file as an Excel sheet. The 'payment_date' column has mixed formats: some rows are '2024-03-15', others are '15/03/2024'. How do you handle this safely in pandas?",
         "code": """import pandas as pd
 df = pd.read_excel('daily_repayments.xlsx')
 # payment_date dtype: object""",
@@ -154,7 +154,7 @@ df = pd.read_excel('daily_repayments.xlsx')
     },
     {
         "cat": "Python", "diff": "hard",
-        "q": "Watu Credit's client dataset has duplicate client_id rows because of a system migration. Some duplicates have different values in 'phone_number'. Write code to deduplicate, keeping the most recently updated record per client.",
+        "q": "The Company's client dataset has duplicate client_id rows because of a system migration. Some duplicates have different values in 'phone_number'. Write code to deduplicate, keeping the most recently updated record per client.",
         "code": """import pandas as pd
 df = pd.read_excel('clients.xlsx')
 # columns: client_id, name, phone_number, last_updated (datetime)""",
@@ -169,7 +169,7 @@ df = pd.read_excel('clients.xlsx')
     },
     {
         "cat": "Python", "diff": "hard",
-        "q": "You need to calculate each Watu Credit client's days past due (DPD) — the number of days since their earliest unpaid scheduled payment.",
+        "q": "You need to calculate each client's days past due (DPD) for The Company — the number of days since their earliest unpaid scheduled payment.",
         "code": """import pandas as pd
 from datetime import date
 df = pd.read_excel('schedules.xlsx')
@@ -185,7 +185,7 @@ df = pd.read_excel('schedules.xlsx')
     },
     {
         "cat": "Python", "diff": "medium",
-        "q": "Watu Credit's loan portfolio file has an 'interest_rate' column stored as strings like '18%' and '21.5%'. Convert this column to a usable float (as a decimal, e.g. 0.18).",
+        "q": "The Company's loan portfolio file has an 'interest_rate' column stored as strings like '18%' and '21.5%'. Convert this column to a usable float (as a decimal, e.g. 0.18).",
         "code": """import pandas as pd
 df = pd.read_excel('portfolio.xlsx')
 # interest_rate: '18%', '21.5%', '15%'""",
@@ -200,7 +200,7 @@ df = pd.read_excel('portfolio.xlsx')
     },
     {
         "cat": "Power BI", "diff": "medium",
-        "q": "In Watu Credit's Power BI dashboard, you need a measure that shows the repayment collection rate: total amount collected divided by total amount scheduled, within the current filter context.",
+        "q": "In The Company's Power BI dashboard, you need a measure that shows the repayment collection rate: total amount collected divided by total amount scheduled, within the current filter context.",
         "code": """-- Tables:
 -- Repayments[amount_paid]
 -- Schedules[expected_amount]""",
@@ -215,7 +215,7 @@ df = pd.read_excel('portfolio.xlsx')
     },
     {
         "cat": "Power BI", "diff": "hard",
-        "q": "Watu Credit's leadership wants to see loan disbursements compared to the same month last year (SPLY) in a single visual. Write the correct DAX measure.",
+        "q": "The Company's leadership wants to see loan disbursements compared to the same month last year (SPLY) in a single visual. Write the correct DAX measure.",
         "code": """-- DateTable[Date] is a marked date table
 -- Loans[amount] is the disbursement amount""",
         "opts": [
@@ -229,7 +229,7 @@ df = pd.read_excel('portfolio.xlsx')
     },
     {
         "cat": "Power BI", "diff": "hard",
-        "q": "A Watu Credit report has a branch slicer. You need a card visual that always shows the national PAR30 regardless of which branch is selected. What DAX pattern achieves this?",
+        "q": "A report for The Company has a branch slicer. You need a card visual that always shows the national PAR30 regardless of which branch is selected. What DAX pattern achieves this?",
         "code": """-- Loans[outstanding_balance], Loans[branch_id]
 -- Loans[is_par30] (1 if PAR30, 0 otherwise)""",
         "opts": [
@@ -243,7 +243,7 @@ df = pd.read_excel('portfolio.xlsx')
     },
     {
         "cat": "Power BI", "diff": "medium",
-        "q": "Watu Credit's dashboard has a date slicer. You need a measure showing loans active AS OF the selected date, not just loans disbursed on that date. Which DAX is correct?",
+        "q": "The Company's dashboard has a date slicer. You need a measure showing loans active AS OF the selected date, not just loans disbursed on that date. Which DAX is correct?",
         "code": """-- Loans[disbursement_date], Loans[maturity_date]
 -- DateTable[Date]""",
         "opts": [
@@ -257,7 +257,7 @@ df = pd.read_excel('portfolio.xlsx')
     },
     {
         "cat": "Statistics", "diff": "medium",
-        "q": "Watu Credit pilots a new credit scoring model in one region. Default rate drops from 18% to 14%. p-value = 0.03, alpha = 0.05, n = 800 clients. What is the correct conclusion?",
+        "q": "The Company pilots a new credit scoring model in one region. Default rate drops from 18% to 14%. p-value = 0.03, alpha = 0.05, n = 800 clients. What is the correct conclusion?",
         "code": """-- Control region:  n=800, default_rate=18%
 -- Pilot region:     n=800, default_rate=14%
 -- p-value = 0.03, alpha = 0.05""",
@@ -272,7 +272,7 @@ df = pd.read_excel('portfolio.xlsx')
     },
     {
         "cat": "Statistics", "diff": "hard",
-        "q": "Watu Credit's default prediction model has precision = 0.72 and recall = 0.41. A colleague suggests raising the classification threshold to improve precision. What is the trade-off?",
+        "q": "The Company's default prediction model has precision = 0.72 and recall = 0.41. A colleague suggests raising the classification threshold to improve precision. What is the trade-off?",
         "code": """-- Current threshold: 0.5
 -- Precision: 0.72  (of predicted defaults, 72% are real)
 -- Recall:    0.41  (of actual defaults, 41% are caught)
@@ -288,7 +288,7 @@ df = pd.read_excel('portfolio.xlsx')
     },
     {
         "cat": "Statistics", "diff": "hard",
-        "q": "You want to test whether repayment rates differ significantly across Watu Credit's 5 regional branches. Which statistical approach is correct?",
+        "q": "You want to test whether repayment rates differ significantly across The Company's 5 regional branches. Which statistical approach is correct?",
         "code": """-- Branches: Nairobi, Mombasa, Kisumu, Nakuru, Eldoret
 -- Metric: repayment_rate per client (continuous, approx. normal)
 -- Question: do the means differ across branches?""",
@@ -303,7 +303,7 @@ df = pd.read_excel('portfolio.xlsx')
     },
     {
         "cat": "Statistics", "diff": "medium",
-        "q": "In a Watu Credit logistic regression model predicting default, the coefficient for 'loan_term_months' is -0.12. What is the correct interpretation?",
+        "q": "In The Company's logistic regression model predicting default, the coefficient for 'loan_term_months' is -0.12. What is the correct interpretation?",
         "code": """-- log-odds(default) = B0 - 0.12*loan_term_months + ...
 -- e^(-0.12) ≈ 0.887""",
         "opts": [
@@ -317,7 +317,7 @@ df = pd.read_excel('portfolio.xlsx')
     },
     {
         "cat": "Scenario", "diff": "hard",
-        "q": "Watu Credit's operations team reports the daily disbursement Power BI dashboard shows zero disbursements for yesterday, but the database clearly has records. What are your investigation steps?",
+        "q": "The Company's operations team reports the daily disbursement Power BI dashboard shows zero disbursements for yesterday, but the database clearly has records. What are your investigation steps?",
         "code": """-- Dashboard uses DirectQuery to the data warehouse
 -- DateTable is a separate imported table
 -- Report filter: DateTable[Date] = TODAY()-1""",
@@ -332,7 +332,7 @@ df = pd.read_excel('portfolio.xlsx')
     },
     {
         "cat": "Scenario", "diff": "hard",
-        "q": "Watu Credit's CFO asks: 'Our average loan size has grown 22% this year, but total disbursements are flat. How is that possible?' How do you explain and investigate this analytically?",
+        "q": "The Company's CFO asks: 'Our average loan size has grown 22% this year, but total disbursements are flat. How is that possible?' How do you explain and investigate this analytically?",
         "code": """-- Year-to-date:
 -- Avg loan size: KES 45,000 (was KES 36,900 last year)
 -- Total disbursements: ~same as last year""",
@@ -343,23 +343,23 @@ df = pd.read_excel('portfolio.xlsx')
             "Total disbursements should be recalculated using median instead",
         ],
         "ans": 0,
-        "expl": "Total = Average x Count. If average rises 22% and total is flat, loan count must have fallen by ~18%. The analytical story: Watu may be serving fewer but wealthier clients, or facing acquisition slowdown, or making a strategic shift. Breaking down by branch and product type confirms which.",
+        "expl": "Total = Average x Count. If average rises 22% and total is flat, loan count must have fallen by ~18%. The analytical story: The Company may be serving fewer but wealthier clients, or facing acquisition slowdown, or making a strategic shift. Breaking down by branch and product type confirms which.",
     },
     {
         "cat": "Scenario", "diff": "medium",
-        "q": "You are building a Watu Credit Data Quality Checker for field-collected data. A 'farm_size_ha' column frequently has values entered as acres instead of hectares by some field agents. How do you detect and handle this programmatically?",
+        "q": "The Company issues bike loans and you are building a Data Quality Checker for the loan application dataset. The 'bike_value_kes' column has suspiciously high values — some entries appear to be in USD instead of KES (1 USD ≈ 130 KES). How do you detect and handle this programmatically?",
         "code": """import pandas as pd
-df = pd.read_excel('field_data.xlsx')
-# farm_size_ha expected range: 0.1 - 20 ha
-# 1 acre = 0.4047 ha, so an error shows as ~2.5x larger""",
+df = pd.read_excel('bike_loans.xlsx')
+# bike_value_kes expected range: KES 15,000 - KES 150,000
+# USD entries appear as: 500, 800, 1200 (should be 65,000 / 104,000 / 156,000)""",
         "opts": [
-            "Q1 = df['farm_size_ha'].quantile(0.25)\nQ3 = df['farm_size_ha'].quantile(0.75)\nIQR = Q3 - Q1\nsuspect = df['farm_size_ha'] > Q3 + 1.5*IQR\ndf.loc[suspect, 'farm_size_ha_flag'] = 'Possible acres entry'\ndf.loc[suspect, 'farm_size_ha_corrected'] = (\n  df.loc[suspect, 'farm_size_ha'] * 0.4047\n)",
-            "df = df[df['farm_size_ha'] < 20]",
-            "df['farm_size_ha'] = df['farm_size_ha'] * 0.4047",
-            "df.dropna(subset=['farm_size_ha'], inplace=True)",
+            "Q1 = df['bike_value_kes'].quantile(0.25)\nQ3 = df['bike_value_kes'].quantile(0.75)\nIQR = Q3 - Q1\nsuspect_low = df['bike_value_kes'] < Q1 - 1.5 * IQR\ndf.loc[suspect_low, 'bike_value_flag'] = 'Possible USD entry'\ndf.loc[suspect_low, 'bike_value_corrected'] = (\n  df.loc[suspect_low, 'bike_value_kes'] * 130\n)",
+            "df = df[df['bike_value_kes'] > 15000]",
+            "df['bike_value_kes'] = df['bike_value_kes'] * 130",
+            "df.dropna(subset=['bike_value_kes'], inplace=True)",
         ],
         "ans": 0,
-        "expl": "The correct approach flags rather than silently converts — you cannot be certain every outlier is an acres error. IQR detects statistical outliers, a flag preserves auditability, and the corrected column applies the acres-to-ha conversion factor (0.4047) for review. Option C converts all values indiscriminately, corrupting correctly entered hectare values.",
+        "expl": "USD entries will appear as statistical outliers on the LOW end (e.g. 500 vs expected 65,000+), so we flag values below Q1 - 1.5*IQR. The flag preserves auditability — you cannot be certain every low value is a USD error without manual review. The corrected column multiplies by 130 (USD to KES rate) for review. Option C converts all values indiscriminately, corrupting correctly entered KES values. Option B silently drops data without investigation.",
     },
 ]
 
@@ -380,10 +380,10 @@ OPTION_LETTERS = ["A", "B", "C", "D"]
 
 # ── Session State ─────────────────────────────────────────────────────────────
 def init_state():
-    if "answered"     not in st.session_state: st.session_state.answered     = {}
-    if "current"      not in st.session_state: st.session_state.current      = 0
-    if "cat_filter"   not in st.session_state: st.session_state.cat_filter   = "All"
-    if "score"        not in st.session_state: st.session_state.score        = 0
+    if "answered"       not in st.session_state: st.session_state.answered       = {}
+    if "current"        not in st.session_state: st.session_state.current        = 0
+    if "cat_filter"     not in st.session_state: st.session_state.cat_filter     = "All"
+    if "score"          not in st.session_state: st.session_state.score          = 0
     if "total_answered" not in st.session_state: st.session_state.total_answered = 0
 
 init_state()
@@ -454,9 +454,9 @@ if not filtered:
     st.info("No questions in this category.")
     st.stop()
 
-total_q = len(filtered)
-cur_idx = st.session_state.current
-q       = filtered[cur_idx]
+total_q    = len(filtered)
+cur_idx    = st.session_state.current
+q          = filtered[cur_idx]
 global_idx = QUESTIONS.index(q)
 
 # Progress bar
@@ -464,11 +464,13 @@ st.markdown(f"**Question {cur_idx + 1} of {total_q}**")
 st.progress((cur_idx + 1) / total_q)
 
 # Category + difficulty badges
-icon, bg, fg = PILL_STYLES.get(q["cat"], ("", "#eee", "#333"))
+icon, bg, fg               = PILL_STYLES.get(q["cat"], ("", "#eee", "#333"))
 diff_icon, diff_bg, diff_fg = DIFF_COLORS.get(q["diff"], ("", "#eee", "#333"))
 st.markdown(
-    f'<span style="background:{bg};color:{fg};padding:3px 12px;border-radius:8px;font-size:0.82rem;font-weight:600;margin-right:8px">{icon} {q["cat"]}</span>'
-    f'<span style="background:{diff_bg};color:{diff_fg};padding:3px 10px;border-radius:8px;font-size:0.78rem;font-weight:600">{diff_icon} {q["diff"]}</span>',
+    f'<span style="background:{bg};color:{fg};padding:3px 12px;border-radius:8px;'
+    f'font-size:0.82rem;font-weight:600;margin-right:8px">{icon} {q["cat"]}</span>'
+    f'<span style="background:{diff_bg};color:{diff_fg};padding:3px 10px;border-radius:8px;'
+    f'font-size:0.78rem;font-weight:600">{diff_icon} {q["diff"]}</span>',
     unsafe_allow_html=True,
 )
 st.markdown("<br>", unsafe_allow_html=True)
@@ -478,7 +480,7 @@ st.markdown(f"### {q['q']}")
 
 # Code block
 if q.get("code"):
-    st.code(q["code"], language="sql")
+    st.code(q["code"], language="python" if q["cat"] == "Python" else "sql")
 
 # Answer options
 already_answered = global_idx in st.session_state.answered
@@ -488,22 +490,48 @@ st.markdown("**Select your answer:**")
 
 for i, opt in enumerate(q["opts"]):
     letter = OPTION_LETTERS[i]
-    label  = f"**{letter}.** `{opt}`" if len(opt) < 80 else f"**{letter}.**"
-
     if already_answered:
         if i == q["ans"]:
-            st.success(f"✅  **{letter}.** Correct answer\n```\n{opt}\n```")
+            st.success(f"✅  **{letter}.** Correct answer")
+            st.code(opt, language="python" if q["cat"] == "Python" else "sql")
         elif i == chosen_answer and chosen_answer != q["ans"]:
-            st.error(f"❌  **{letter}.** Your answer\n```\n{opt}\n```")
+            st.error(f"❌  **{letter}.** Your answer")
+            st.code(opt, language="python" if q["cat"] == "Python" else "sql")
         else:
-            st.markdown(f"**{letter}.**\n```\n{opt}\n```")
+            st.markdown(f"**{letter}.**")
+            st.code(opt, language="python" if q["cat"] == "Python" else "sql")
     else:
-        if st.button(f"{letter}.  {opt[:120]}{'...' if len(opt) > 120 else ''}", key=f"opt_{global_idx}_{i}", use_container_width=True):
+        # Render full option text as a styled card with a button below
+        opt_escaped = opt.replace("\\", "\\\\").replace("`", "\\`")
+        lang = "python" if q["cat"] == "Python" else "sql"
+        st.markdown(
+            f"""
+            <div style="
+                border: 1px solid #d0d0d0;
+                border-radius: 8px;
+                padding: 0.6rem 1rem 0.4rem 1rem;
+                margin-bottom: 2px;
+                background: #fafafa;
+                font-family: monospace;
+                font-size: 0.85rem;
+                white-space: pre-wrap;
+                color: #1e1e1e;
+                line-height: 1.6;
+            "><strong style="font-family:sans-serif;font-size:0.9rem;">{letter}.</strong>  {opt.replace(chr(10), '<br>')}</div>
+            """,
+            unsafe_allow_html=True,
+        )
+        if st.button(
+            f"Select {letter}",
+            key=f"opt_{global_idx}_{i}",
+            use_container_width=True,
+        ):
             st.session_state.answered[global_idx] = i
             st.session_state.total_answered += 1
             if i == q["ans"]:
                 st.session_state.score += 1
             st.rerun()
+        st.markdown("<div style='margin-bottom:6px'></div>", unsafe_allow_html=True)
 
 # Explanation
 if already_answered:
@@ -520,13 +548,20 @@ with col1:
         st.session_state.current -= 1
         st.rerun()
 with col2:
-    answered_count = sum(1 for q2 in filtered if QUESTIONS.index(q2) in st.session_state.answered)
+    answered_count = sum(
+        1 for q2 in filtered if QUESTIONS.index(q2) in st.session_state.answered
+    )
     st.markdown(
         f"<p style='text-align:center;color:#666;font-size:0.9rem;margin-top:8px'>"
         f"{answered_count} of {total_q} answered in this category</p>",
         unsafe_allow_html=True,
     )
 with col3:
-    if st.button("Next →", disabled=(cur_idx == total_q - 1), use_container_width=True, type="primary"):
+    if st.button(
+        "Next →",
+        disabled=(cur_idx == total_q - 1),
+        use_container_width=True,
+        type="primary",
+    ):
         st.session_state.current += 1
         st.rerun()
